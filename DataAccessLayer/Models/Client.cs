@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserLogic.Models
+namespace DAL.Models
 {
-    public class UserModel
+    public class Client
     {
         public int ID { get; set; }
 
@@ -18,6 +18,6 @@ namespace UserLogic.Models
 
         public string NIP { get; set; }
 
-        public virtual AddressModel Address { get; set; }
+        public Address Address { get; set; }
     }
 }

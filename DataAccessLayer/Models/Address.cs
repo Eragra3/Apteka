@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserLogic.Models
+namespace DAL.Models
 {
-    public class AddressModel
+    public class Address
     {
         public string City { get; set; }
 
