@@ -14,6 +14,6 @@ namespace DAL.Models
 
         public Address Address { get; set; }
 
-        public DateTime AssemblyDate { get; set; }
+        public DateTime? AssemblyDate { get; set; }
     }
 }

@@ -19,5 +19,7 @@ namespace DAL.Models
         public string Name { get; set; }
 
         public bool InOffer { get; set; }
+
+        public bool IsIngridient { get; set; }
     }
 }

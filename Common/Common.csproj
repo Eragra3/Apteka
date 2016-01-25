@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PositionEnum.cs" />
+    <Compile Include="Enums\OrderStatusEnum.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

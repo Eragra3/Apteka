@@ -16,9 +16,9 @@ namespace DAL.Models
         public virtual Order Order { get; set; }
 
         [Key, Column(Order = 1)]
-        public int ClientID { get; set; }
+        public int ProductID { get; set; }
 
-        public virtual Client Client { get; set; }
+        public virtual Product Product { get; set; }
 
         public decimal Quantity { get; set; }
 

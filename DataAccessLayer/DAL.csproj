@@ -62,12 +62,29 @@
     <Compile Include="Migrations\201601251533089_InitialMigration.Designer.cs">
       <DependentUpon>201601251533089_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601251812251_ReworkedRecipeDrugABit.cs" />
+    <Compile Include="Migrations\201601251812251_ReworkedRecipeDrugABit.Designer.cs">
+      <DependentUpon>201601251812251_ReworkedRecipeDrugABit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601252037101_ReworkedSomething.cs" />
+    <Compile Include="Migrations\201601252037101_ReworkedSomething.Designer.cs">
+      <DependentUpon>201601252037101_ReworkedSomething.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601252235533_ReworkedModelsALot.cs" />
+    <Compile Include="Migrations\201601252235533_ReworkedModelsALot.Designer.cs">
+      <DependentUpon>201601252235533_ReworkedModelsALot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601252345151_FixedDatesToBeNullable.cs" />
+    <Compile Include="Migrations\201601252345151_FixedDatesToBeNullable.Designer.cs">
+      <DependentUpon>201601252345151_FixedDatesToBeNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Contains.cs" />
     <Compile Include="Models\DB.Context.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Ingridient.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManagerStatus.cs" />
@@ -89,6 +106,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601251533089_InitialMigration.resx">
       <DependentUpon>201601251533089_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601251812251_ReworkedRecipeDrugABit.resx">
+      <DependentUpon>201601251812251_ReworkedRecipeDrugABit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601252037101_ReworkedSomething.resx">
+      <DependentUpon>201601252037101_ReworkedSomething.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601252235533_ReworkedModelsALot.resx">
+      <DependentUpon>201601252235533_ReworkedModelsALot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601252345151_FixedDatesToBeNullable.resx">
+      <DependentUpon>201601252345151_FixedDatesToBeNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

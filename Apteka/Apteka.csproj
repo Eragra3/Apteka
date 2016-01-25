@@ -129,18 +129,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipeDrugController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Enums\ShippingEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HashProvider.cs" />
+    <Compile Include="Helpers\Translators.cs" />
+    <Compile Include="Models\IngridientViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
+    <Compile Include="Models\PrimaryRecipeDrugViewModel.cs" />
+    <Compile Include="Models\RecipeDrugPaymentViewModel.cs" />
+    <Compile Include="Models\RecipeDrugViewModel.cs" />
     <Compile Include="Models\RegisterUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -148,8 +156,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.2.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -158,6 +168,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -176,6 +187,9 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_LeftMenu.cshtml" />
+    <Content Include="Views\RecipeDrug\Index.cshtml" />
+    <Content Include="Views\RecipeDrug\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -186,7 +200,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClientService\ClientLogic.csproj">
@@ -197,9 +210,25 @@
       <Project>{5e508bf1-e564-45cf-8092-46fe65162080}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EmployeeLogic\EmployeeLogic.csproj">
+      <Project>{305280BD-0C23-4AB6-99E3-850FB9A5DAFB}</Project>
+      <Name>EmployeeLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logging\Logging.csproj">
       <Project>{d1796951-a12a-4a21-97c3-592a94aa7e55}</Project>
       <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Package\PackageLogic.csproj">
+      <Project>{702ba624-855c-49d1-a3b2-ef8812c47a1f}</Project>
+      <Name>PackageLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductLogic\ProductLogic.csproj">
+      <Project>{5f29a8e4-059d-4cc7-abd7-80a2d7ec3a9a}</Project>
+      <Name>ProductLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecipeDrugLogic\RecipeDrugLogic.csproj">
+      <Project>{50e1387a-a2e1-49e7-9c62-e6233dafc478}</Project>
+      <Name>RecipeDrugLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

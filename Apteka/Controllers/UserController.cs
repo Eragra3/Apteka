@@ -97,6 +97,7 @@ namespace Apteka.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            Session["User"] = null;
             return RedirectToAction("Index", "Home");
         }
     }

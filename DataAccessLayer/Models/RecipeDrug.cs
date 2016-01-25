@@ -10,16 +10,26 @@ namespace DAL.Models
     {
         public int ID { get; set; }
 
-        public int EvaluatedByID { get; set; }
+        //public int EvaluatedByID { get; set; }
 
-        public virtual Employee EvaluatedBy { get; set; }
+        //public virtual Employee EvaluatedBy { get; set; }
 
-        public int MadeByID { get; set; }
+        public int PackageID { get; set; }
+
+        public virtual Package Package { get; set; }
+
+        public int? MadeByID { get; set; }
 
         public virtual Employee MadeBy { get; set; }
 
-        public DateTime EvaluatedDate { get; set; }
+        public DateTime? EvaluatedDate { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public int StatusID { get; set; }
+
+        public virtual OrderStatus Status { get; set; }
+
+        public virtual IList<Ingridient> Ingridients { get; set; }
     }
 }
