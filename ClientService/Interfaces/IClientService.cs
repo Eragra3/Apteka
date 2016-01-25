@@ -1,20 +1,23 @@
-﻿using DAL.Models;
+﻿using ClientLogic.Models;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientService.Interfaces
+namespace ClientLogic.Interfaces
 {
     public interface IClientService
     {
-        Client Get(int id);
+        UserModel Get(int id);
 
-        bool Add(Client entity);
+        UserModel Get(string login);
 
-        bool Remove(Client entity);
+        bool Add(UserModel model);
 
-        bool Edit(Client entity);
+        bool Remove(UserModel model);
+
+        bool Edit(UserModel model);
     }
 }
