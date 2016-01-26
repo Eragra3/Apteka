@@ -1,4 +1,4 @@
-﻿@using Apteka.Enums
+﻿@using Common.Enums
 @model Apteka.Models.PrimaryRecipeDrugViewModel
 @{
     int i = 1;
@@ -19,12 +19,15 @@
             <div class="form-group">
                 @Html.Label(string.Format("ingridient{0}L", i), string.Format("Składnik {0}", i), htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.RecipeDrugViewModel.Ingridients[i - 1].Product, new SelectList(Model.Ingridients, "Name", "Name", Model.RecipeDrugViewModel.Ingridients[i - 1].Product), string.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Product, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(m => m.RecipeDrugViewModel.Ingridients[i - 1].ProductID, new SelectList(Model.Ingridients, "ID", "Name", Model.RecipeDrugViewModel.Ingridients[i - 1].ProductID), string.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].ProductID, "", new { @class = "text-danger" })
                 </div>
-                @Html.Label("indgridient1Q", "Ilość", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("indgridient1Q", "Ilość", htmlAttributes: new { @class = "control-label col-md-1" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, new { @class = "form-control", rows = 5 })
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, new { @class = "form-control", rows = 5 })
+                        <span class="input-group-addon" id="basic-addon">mg</span>
+                    </div>
                     @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,10 +45,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RecipeDrugViewModel.Shipping, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.DropDownListFor(model => model.RecipeDrugViewModel.Shipping, EnumHelper.GetSelectList(typeof(ShippingEnum), ShippingEnum.Courier).Select(x => { x.Text = Apteka.Helpers.Translators.ShippingTranslator(x.Text); return x; }), string.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Shipping, "", new { @class = "text-danger" })
-                </div>
+                @Html.DropDownListFor(model => model.RecipeDrugViewModel.Shipping, EnumHelper.GetSelectList(typeof(ShippingEnum), ShippingEnum.Courier).Select(x => { x.Text = Apteka.Helpers.Translators.ShippingTranslator(x.Text); return x; }), string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Shipping, "", new { @class = "text-danger" })
             </div>
         </div>
 

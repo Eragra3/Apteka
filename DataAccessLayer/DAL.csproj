@@ -45,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +55,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Designer\Clients.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Contains.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\C__MigrationHistory.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\DatabaseEntityDesigner.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntityDesigner.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\DatabaseEntityDesigner.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\DatabaseEntityDesigner.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntityDesigner.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Employees.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Ingridients.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Invoices.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Managers.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\ManagerStatus.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Orders.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\OrderStatus.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Packages.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\PackageStatus.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Positions.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\Products.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designer\RecipeDrugs.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
     <Compile Include="Factories\UnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
@@ -78,7 +139,12 @@
     <Compile Include="Migrations\201601252345151_FixedDatesToBeNullable.Designer.cs">
       <DependentUpon>201601252345151_FixedDatesToBeNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601261845382_AddedShippingToPackage.cs" />
+    <Compile Include="Migrations\201601261845382_AddedShippingToPackage.Designer.cs">
+      <DependentUpon>201601261845382_AddedShippingToPackage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Shipping.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Contains.cs" />
@@ -101,6 +167,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Designer\DatabaseEntityDesigner.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseEntityDesigner.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Designer\DatabaseEntityDesigner.edmx.diagram">
+      <DependentUpon>DatabaseEntityDesigner.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +192,24 @@
     <EmbeddedResource Include="Migrations\201601252345151_FixedDatesToBeNullable.resx">
       <DependentUpon>201601252345151_FixedDatesToBeNullable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601261845382_AddedShippingToPackage.resx">
+      <DependentUpon>201601261845382_AddedShippingToPackage.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Designer\DatabaseEntityDesigner.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseEntityDesigner.edmx</DependentUpon>
+      <LastGenOutput>DatabaseEntityDesigner.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Designer\DatabaseEntityDesigner.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseEntityDesigner.edmx</DependentUpon>
+      <LastGenOutput>DatabaseEntityDesigner.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

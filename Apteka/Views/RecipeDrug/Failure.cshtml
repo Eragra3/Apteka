@@ -1,0 +1,25 @@
+﻿@model int
+<div class="panel panel-default">
+    <div class="panel-heading text-center"><h1>Zamów lek recepturowy</h1></div>
+    <div class="panel-body">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12 center text-center">
+                    <h2 class="text-danger">Wystąpił błąd z płatnością za zamówienie</h2>
+                    <br />
+                    <h2>@Html.ActionLink("Zapłać ponownie", "Payment", "RecipeDrug", new { id = Model }, null)</h2>
+                    <br />
+                    <div class="well">
+                        <p class="text-info">
+                            Pamiętaj, że twoje zamówienia możesz zobaczyć przechodząc do zakładki "Moje konto" i wybierając "Moje zamówienia"
+                            <br />
+                            Jeżeli np. strona banku nie działa, możesz spróbować zapłacić później, twoje zamówienie nie zostało usunięte
+                        </p>
+                    </div>
+                    <br />
+                    <h3>@Html.ActionLink("Wróć do przeglądania produktów", "Index", "Home")</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

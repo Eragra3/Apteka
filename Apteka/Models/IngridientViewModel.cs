@@ -10,7 +10,7 @@ namespace Apteka.Models
     public class IngridientViewModel
     {
         [Display(Name = "Składnik")]
-        public string Product { get; set; }
+        public int? ProductID { get; set; }
 
         [Display(Name = "Ilość")]
         public decimal Quantity { get; set; }
@@ -23,7 +23,7 @@ namespace Apteka.Models
             {
                 ID = 0,
                 Price = Price.Value,
-                ProductID = 0,
+                ProductID = ProductID.HasValue ? ProductID.Value : 0,
                 Product = null,
                 Quantity = Quantity
             };

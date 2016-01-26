@@ -1,0 +1,1037 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AptekaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="NIP" Type="nvarchar(max)" />
+          <Property Name="Address_City" Type="nvarchar(max)" />
+          <Property Name="Address_Street" Type="nvarchar(max)" />
+          <Property Name="Address_ZipCode" Type="nvarchar(max)" />
+          <Property Name="Address_HouseNumber" Type="nvarchar(max)" />
+          <Property Name="Address_ApartmentNumber" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Contains">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="JoinDate" Type="datetime" Nullable="false" />
+          <Property Name="Index" Type="nvarchar(max)" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingridients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RecipeDrugID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Address_City" Type="nvarchar(max)" />
+          <Property Name="Address_Street" Type="nvarchar(max)" />
+          <Property Name="Address_ZipCode" Type="nvarchar(max)" />
+          <Property Name="Address_HouseNumber" Type="nvarchar(max)" />
+          <Property Name="Address_ApartmentNumber" Type="nvarchar(max)" />
+          <Property Name="AssemblyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PackageStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="InOffer" Type="bit" Nullable="false" />
+          <Property Name="IsIngridient" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipeDrugs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MadeByID" Type="int" />
+          <Property Name="EvaluatedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="PackageID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Contains_dbo_Orders_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contains_dbo_Products_ProductID">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Positions_PositionID">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ingridients_dbo_Products_ProductID">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Ingridients" Type="Self.Ingridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ingridients">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID">
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="1" />
+          <End Role="Ingridients" Type="Self.Ingridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecipeDrugs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ingridients">
+              <PropertyRef Name="RecipeDrugID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Invoices_dbo_Clients_ClientID">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Invoices_dbo_Orders_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Managers_dbo_Employees_EmployeeID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Managers">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Managers_dbo_ManagerStatus_StatusID">
+          <End Role="ManagerStatus" Type="Self.ManagerStatus" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagerStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Managers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Clients_ClientID">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_OrderStatus_StatusID">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Packages_PackageID">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="MadeByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_Packages_PackageID">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AptekaModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contains" EntityType="Self.Contains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingridients" EntityType="Self.Ingridients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerStatus" EntityType="Self.ManagerStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageStatus" EntityType="Self.PackageStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipeDrugs" EntityType="Self.RecipeDrugs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Contains_dbo_Orders_OrderID" Association="Self.FK_dbo_Contains_dbo_Orders_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contains_dbo_Products_ProductID" Association="Self.FK_dbo_Contains_dbo_Products_ProductID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Positions_PositionID" Association="Self.FK_dbo_Employees_dbo_Positions_PositionID">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ingridients_dbo_Products_ProductID" Association="Self.FK_dbo_Ingridients_dbo_Products_ProductID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Ingridients" EntitySet="Ingridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID" Association="Self.FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID">
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+            <End Role="Ingridients" EntitySet="Ingridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Invoices_dbo_Clients_ClientID" Association="Self.FK_dbo_Invoices_dbo_Clients_ClientID">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Invoices_dbo_Orders_OrderID" Association="Self.FK_dbo_Invoices_dbo_Orders_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Managers_dbo_Employees_EmployeeID" Association="Self.FK_dbo_Managers_dbo_Employees_EmployeeID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Managers_dbo_ManagerStatus_StatusID" Association="Self.FK_dbo_Managers_dbo_ManagerStatus_StatusID">
+            <End Role="ManagerStatus" EntitySet="ManagerStatus" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Clients_ClientID" Association="Self.FK_dbo_Orders_dbo_Clients_ClientID">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_OrderStatus_StatusID" Association="Self.FK_dbo_Orders_dbo_OrderStatus_StatusID">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Packages_PackageID" Association="Self.FK_dbo_Orders_dbo_Packages_PackageID">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID" Association="Self.FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID" Association="Self.FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_Packages_PackageID" Association="Self.FK_dbo_RecipeDrugs_dbo_Packages_PackageID">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AptekaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_HouseNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_ApartmentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_dbo_Invoices_dbo_Clients_ClientID" FromRole="Clients" ToRole="Invoices" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Clients_ClientID" FromRole="Clients" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Contains">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Contains_dbo_Orders_OrderID" FromRole="Contains" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Contains_dbo_Products_ProductID" FromRole="Contains" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Index" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK_dbo_Employees_dbo_Positions_PositionID" FromRole="Employees" ToRole="Positions" />
+          <NavigationProperty Name="Managers" Relationship="Self.FK_dbo_Managers_dbo_Employees_EmployeeID" FromRole="Employees" ToRole="Managers" />
+          <NavigationProperty Name="RecipeDrugs" Relationship="Self.FK_dbo_RecipeDrugs_dbo_Employees_MadeByID" FromRole="Employees" ToRole="RecipeDrugs" />
+        </EntityType>
+        <EntityType Name="Ingridients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RecipeDrugID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Ingridients_dbo_Products_ProductID" FromRole="Ingridients" ToRole="Products" />
+          <NavigationProperty Name="RecipeDrugs" Relationship="Self.FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID" FromRole="Ingridients" ToRole="RecipeDrugs" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Invoices_dbo_Clients_ClientID" FromRole="Invoices" ToRole="Clients" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Invoices_dbo_Orders_OrderID" FromRole="Invoices" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Managers_dbo_Employees_EmployeeID" FromRole="Managers" ToRole="Employees" />
+          <NavigationProperty Name="ManagerStatus" Relationship="Self.FK_dbo_Managers_dbo_ManagerStatus_StatusID" FromRole="Managers" ToRole="ManagerStatus" />
+        </EntityType>
+        <EntityType Name="ManagerStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Managers" Relationship="Self.FK_dbo_Managers_dbo_ManagerStatus_StatusID" FromRole="ManagerStatus" ToRole="Managers" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Orders_dbo_Clients_ClientID" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="Contains" Relationship="Self.FK_dbo_Contains_dbo_Orders_OrderID" FromRole="Orders" ToRole="Contains" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_dbo_Invoices_dbo_Orders_OrderID" FromRole="Orders" ToRole="Invoices" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK_dbo_Orders_dbo_OrderStatus_StatusID" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_dbo_Orders_dbo_Packages_PackageID" FromRole="Orders" ToRole="Packages" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_OrderStatus_StatusID" FromRole="OrderStatus" ToRole="Orders" />
+          <NavigationProperty Name="RecipeDrugs" Relationship="Self.FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID" FromRole="OrderStatus" ToRole="RecipeDrugs" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Address_City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_HouseNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_ApartmentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Packages_PackageID" FromRole="Packages" ToRole="Orders" />
+          <NavigationProperty Name="RecipeDrugs" Relationship="Self.FK_dbo_RecipeDrugs_dbo_Packages_PackageID" FromRole="Packages" ToRole="RecipeDrugs" />
+        </EntityType>
+        <EntityType Name="PackageStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Employees_dbo_Positions_PositionID" FromRole="Positions" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InOffer" Type="Boolean" Nullable="false" />
+          <Property Name="IsIngridient" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Contains" Relationship="Self.FK_dbo_Contains_dbo_Products_ProductID" FromRole="Products" ToRole="Contains" />
+          <NavigationProperty Name="Ingridients" Relationship="Self.FK_dbo_Ingridients_dbo_Products_ProductID" FromRole="Products" ToRole="Ingridients" />
+        </EntityType>
+        <EntityType Name="RecipeDrugs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MadeByID" Type="Int32" />
+          <Property Name="EvaluatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PackageID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_RecipeDrugs_dbo_Employees_MadeByID" FromRole="RecipeDrugs" ToRole="Employees" />
+          <NavigationProperty Name="Ingridients" Relationship="Self.FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID" FromRole="RecipeDrugs" ToRole="Ingridients" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID" FromRole="RecipeDrugs" ToRole="OrderStatus" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_dbo_RecipeDrugs_dbo_Packages_PackageID" FromRole="RecipeDrugs" ToRole="Packages" />
+        </EntityType>
+        <Association Name="FK_dbo_Invoices_dbo_Clients_ClientID">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Clients_ClientID">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contains_dbo_Orders_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contains_dbo_Products_ProductID">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Positions_PositionID">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Managers_dbo_Employees_EmployeeID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Managers">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="MadeByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ingridients_dbo_Products_ProductID">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Ingridients" Type="Self.Ingridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ingridients">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID">
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="1" />
+          <End Role="Ingridients" Type="Self.Ingridients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecipeDrugs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ingridients">
+              <PropertyRef Name="RecipeDrugID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Invoices_dbo_Orders_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Managers_dbo_ManagerStatus_StatusID">
+          <End Role="ManagerStatus" Type="Self.ManagerStatus" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagerStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Managers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_OrderStatus_StatusID">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Packages_PackageID">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeDrugs_dbo_Packages_PackageID">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecipeDrugs">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AptekaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Contains" EntityType="Self.Contains" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Ingridients" EntityType="Self.Ingridients" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="ManagerStatus" EntityType="Self.ManagerStatus" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+          <EntitySet Name="Packages" EntityType="Self.Packages" />
+          <EntitySet Name="PackageStatus" EntityType="Self.PackageStatus" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="RecipeDrugs" EntityType="Self.RecipeDrugs" />
+          <AssociationSet Name="FK_dbo_Invoices_dbo_Clients_ClientID" Association="Self.FK_dbo_Invoices_dbo_Clients_ClientID">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Clients_ClientID" Association="Self.FK_dbo_Orders_dbo_Clients_ClientID">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contains_dbo_Orders_OrderID" Association="Self.FK_dbo_Contains_dbo_Orders_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contains_dbo_Products_ProductID" Association="Self.FK_dbo_Contains_dbo_Products_ProductID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Positions_PositionID" Association="Self.FK_dbo_Employees_dbo_Positions_PositionID">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Managers_dbo_Employees_EmployeeID" Association="Self.FK_dbo_Managers_dbo_Employees_EmployeeID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID" Association="Self.FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ingridients_dbo_Products_ProductID" Association="Self.FK_dbo_Ingridients_dbo_Products_ProductID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Ingridients" EntitySet="Ingridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID" Association="Self.FK_dbo_Ingridients_dbo_RecipeDrugs_RecipeDrugID">
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+            <End Role="Ingridients" EntitySet="Ingridients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Invoices_dbo_Orders_OrderID" Association="Self.FK_dbo_Invoices_dbo_Orders_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Managers_dbo_ManagerStatus_StatusID" Association="Self.FK_dbo_Managers_dbo_ManagerStatus_StatusID">
+            <End Role="ManagerStatus" EntitySet="ManagerStatus" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_OrderStatus_StatusID" Association="Self.FK_dbo_Orders_dbo_OrderStatus_StatusID">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Packages_PackageID" Association="Self.FK_dbo_Orders_dbo_Packages_PackageID">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID" Association="Self.FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_Packages_PackageID" Association="Self.FK_dbo_RecipeDrugs_dbo_Packages_PackageID">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AptekaModelStoreContainer" CdmEntityContainer="AptekaEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="AptekaModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="AptekaModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Street" ColumnName="Address_Street" />
+                <ScalarProperty Name="Address_ZipCode" ColumnName="Address_ZipCode" />
+                <ScalarProperty Name="Address_HouseNumber" ColumnName="Address_HouseNumber" />
+                <ScalarProperty Name="Address_ApartmentNumber" ColumnName="Address_ApartmentNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contains">
+            <EntityTypeMapping TypeName="AptekaModel.Contains">
+              <MappingFragment StoreEntitySet="Contains">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="AptekaModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingridients">
+            <EntityTypeMapping TypeName="AptekaModel.Ingridients">
+              <MappingFragment StoreEntitySet="Ingridients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RecipeDrugID" ColumnName="RecipeDrugID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="AptekaModel.Invoices">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="AptekaModel.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerStatus">
+            <EntityTypeMapping TypeName="AptekaModel.ManagerStatus">
+              <MappingFragment StoreEntitySet="ManagerStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="AptekaModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="AptekaModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="AptekaModel.Packages">
+              <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Street" ColumnName="Address_Street" />
+                <ScalarProperty Name="Address_ZipCode" ColumnName="Address_ZipCode" />
+                <ScalarProperty Name="Address_HouseNumber" ColumnName="Address_HouseNumber" />
+                <ScalarProperty Name="Address_ApartmentNumber" ColumnName="Address_ApartmentNumber" />
+                <ScalarProperty Name="AssemblyDate" ColumnName="AssemblyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageStatus">
+            <EntityTypeMapping TypeName="AptekaModel.PackageStatus">
+              <MappingFragment StoreEntitySet="PackageStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="AptekaModel.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="AptekaModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InOffer" ColumnName="InOffer" />
+                <ScalarProperty Name="IsIngridient" ColumnName="IsIngridient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipeDrugs">
+            <EntityTypeMapping TypeName="AptekaModel.RecipeDrugs">
+              <MappingFragment StoreEntitySet="RecipeDrugs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MadeByID" ColumnName="MadeByID" />
+                <ScalarProperty Name="EvaluatedDate" ColumnName="EvaluatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

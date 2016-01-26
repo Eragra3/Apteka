@@ -15,5 +15,9 @@ namespace DAL.Models
         public Address Address { get; set; }
 
         public DateTime? AssemblyDate { get; set; }
+
+        public int ShippingID { get; set; }
+
+        public virtual Shipping Shipping { get; set; }
     }
 }

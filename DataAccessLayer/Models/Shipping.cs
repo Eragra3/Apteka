@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer
+namespace DAL.Models
 {
-    public class Class1
+    public class Shipping
     {
+        public int ID { get; set; }
+
+        public string Name { get; set; }
     }
 }

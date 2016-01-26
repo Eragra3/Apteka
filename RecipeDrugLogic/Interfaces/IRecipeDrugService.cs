@@ -11,7 +11,7 @@ namespace RecipeDrugLogic.Interfaces
     {
         RecipeDrugModel Get(int id);
 
-        bool Add(RecipeDrugModel model);
+        int? Add(RecipeDrugModel model);
 
         bool Remove(RecipeDrugModel model);
 

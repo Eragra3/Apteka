@@ -37,6 +37,7 @@ namespace DAL
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Ingridient> Ingridients { get; set; }
+        public DbSet<Shipping> Shippings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

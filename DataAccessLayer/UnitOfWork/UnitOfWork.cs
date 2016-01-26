@@ -23,6 +23,7 @@ namespace DAL.UnitOfWork
         private GenericRepository<OrderStatus> _orderStatusRepository;
         private GenericRepository<Position> _positionRepository;
         private GenericRepository<Ingridient> _ingridientRepository;
+        private GenericRepository<Shipping> _shippingRepository;
 
         public GenericRepository<Client> UserRepository
         {
@@ -92,6 +93,11 @@ namespace DAL.UnitOfWork
         public GenericRepository<Ingridient> IngridientRepository
         {
             get { return _ingridientRepository ?? (_ingridientRepository = new GenericRepository<Ingridient>(_context)); }
+        }
+
+        public GenericRepository<Shipping> ShippingRepository
+        {
+            get { return _shippingRepository ?? (_shippingRepository = new GenericRepository<Shipping>(_context)); }
         }
 
         public void Save()

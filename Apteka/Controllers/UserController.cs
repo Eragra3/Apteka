@@ -74,7 +74,7 @@ namespace Apteka.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginUserViewModel model)
+        public ActionResult Login(LoginUserViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Apteka.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
                     Session["User"] = user;
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(returnUrl);
                 }
                 ModelState.AddModelError(string.Empty, "Nie ma takiego użytkownika, lub hasło się nie zgadza");
             }

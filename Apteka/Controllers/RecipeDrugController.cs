@@ -1,8 +1,11 @@
-﻿using Apteka.Models;
+﻿using Apteka.Attributes;
+using Apteka.Models;
 using ClientLogic.Models;
+using Common.Enums;
 using ProductLogic.Interfaces;
 using ProductLogic.Services;
 using RecipeDrugLogic.Interfaces;
+using RecipeDrugLogic.Models;
 using RecipeDrugLogic.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Apteka.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     public class RecipeDrugController : Controller
     {
         private readonly IProductService _productService = new ProductService();
@@ -39,8 +42,29 @@ namespace Apteka.Controllers
             if (ModelState.IsValid)
             {
                 var user = Session["User"] as UserModel;
-                model.RecipeDrugViewModel.Address = user.Address;
-                return Payment(model.RecipeDrugViewModel);
+
+                var recipeDrug = model.RecipeDrugViewModel;
+
+                recipeDrug.Address = user.Address;
+                recipeDrug.Ingridients = recipeDrug.Ingridients.Where(i => i.ProductID.HasValue).ToList();
+
+                var ingridients = _productService.GetAllIngridients();
+
+                var ingPrice = 0M;
+                foreach (var ing in recipeDrug.Ingridients)
+                {
+                    ing.Price = ing.Quantity * 0.01M * ingridients.First(i => i.ID == ing.ProductID).Price;
+                    ingPrice += ing.Price.Value;
+                }
+
+                var businessModel = model.RecipeDrugViewModel.ToBusinessModel();
+
+                businessModel.Package.Price = ingPrice + makingRecipeDrugPrice + Common.Enums.ShippingPrices.ShippingPrice(recipeDrug.Shipping);
+                businessModel.EvaluatedDate = DateTime.Now;
+
+                var insertedID = _recipeDrugService.Add(businessModel);
+
+                return Payment(insertedID.Value);
             }
             var models = _productService.GetAllIngridients();
             model.Ingridients = models;
@@ -48,41 +72,64 @@ namespace Apteka.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Payment(RecipeDrugViewModel model)
+        [HttpGet]
+        public ActionResult Payment(int id)
         {
-            model.Ingridients = model.Ingridients.Where(i => !string.IsNullOrEmpty(i.Product)).ToList();
+            var model = _recipeDrugService.Get(id);
 
-            var ingridients = _productService.GetAllIngridients();
-
-            var ingPrice = 0M;
-            foreach (var ing in model.Ingridients)
+            var viewModel = new RecipeDrugPaymentViewModel
             {
-                ing.Price = ing.Quantity * 0.001M * ingridients.First(i => i.Name.Equals(ing.Product)).Price;
-                ingPrice += ing.Price.Value;
-            }
-
-            var newModel = new RecipeDrugPaymentViewModel()
-            {
-                RecipeDrug = model,
-                IngPrice = ingPrice,
+                IngPrice = model.Ingridients.Sum(i => i.Price),
                 ServicePrice = makingRecipeDrugPrice,
-                ShippingPrice = Enums.ShippingPrices.ShippingPrice(model.Shipping)
+                ShippingPrice = ShippingPrices.ShippingPrice(model.Package.Shipping),
+                RecipeDrug = model
             };
 
-            var logicModel = newModel.ToBusinessModel();
-            logicModel.Package.Address = model.Address;
-
-            _recipeDrugService.Add(logicModel);
-
-            return View("Payment", newModel);
+            return View("Payment", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Pay(RecipeDrugPaymentViewModel model)
+        public ActionResult Payment(RecipeDrugPaymentViewModel model)
         {
-            Session["RecipeDrug"] = model;
-            return View(model);
+            model.RecipeDrug = _recipeDrugService.Get(model.RecipeDrug.ID);
+
+            var m = new RecipeDrugAfterPaymentViewModel
+            {
+                PaymentType = model.PaymentType,
+                RecipeDrug = model.RecipeDrug
+            };
+
+            if (model.PaymentType.ToLower().Equals("ondelivery"))
+            {
+                model.RecipeDrug.Status = OrderStatusEnum.OnDelivery;
+                return View("Success");
+            }
+            return PaymentPlaceholder(m);
+        }
+
+        [HttpPost]
+        private ActionResult PaymentPlaceholder(RecipeDrugAfterPaymentViewModel model)
+        {
+            Session["RecipeDrug"] = model.RecipeDrug;
+            return View("PaymentPlaceholder", model);
+        }
+
+        [HttpGet]
+        public ActionResult Success(int id)
+        {
+            var model = _recipeDrugService.Get(id);
+
+            model.Status = OrderStatusEnum.Paid;
+
+            _recipeDrugService.Edit(model);
+
+            return View("Success");
+        }
+
+        [HttpGet]
+        public ActionResult Failure(int id)
+        {
+            return View("Failure", id);
         }
     }
 }

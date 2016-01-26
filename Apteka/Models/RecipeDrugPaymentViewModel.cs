@@ -9,7 +9,7 @@ namespace Apteka.Models
 {
     public class RecipeDrugPaymentViewModel
     {
-        public RecipeDrugViewModel RecipeDrug { get; set; }
+        public RecipeDrugModel RecipeDrug { get; set; }
 
         public string PaymentType { get; set; }
 
@@ -19,22 +19,9 @@ namespace Apteka.Models
 
         public decimal ServicePrice { get; set; }
 
-        public RecipeDrugModel ToBusinessModel()
+        public decimal GetFullPrice()
         {
-            var m = new RecipeDrugModel()
-            {
-                CreatedDate = DateTime.Now,
-                EvaluatedDate = null,
-                ID = 0,
-                MadeBy = null,
-                MadeByID = null,
-                Package = new PackageModel(),
-                Ingridients = RecipeDrug.Ingridients.Select(x => x.ToBusinessModel()).ToList(),
-                PackageID = 0,
-                Status = Common.Enums.OrderStatusEnum.NotPaid
-            };
-
-            return m;
+            return IngPrice + ServicePrice + ShippingPrice;
         }
     }
 }

@@ -1,26 +1,27 @@
 ﻿@model Apteka.Models.RecipeDrugPaymentViewModel
-    @{
-        var i = 1;
-    }
-    <div class="panel panel-default">
-        <div class="panel-heading text-center"><h1>Zamów lek recepturowy</h1></div>
-        <div class="panel-body">
-            <div class="content">
-                @Html.BeginForm(){
-                <h2><small>Cena wytworzenia leku : </small><span class="text-success">@(Model.IngPrice + Model.ServicePrice + Model.ShippingPrice)zł</span></h2>
+@{
+    var i = 1;
+}
+<div class="panel panel-default">
+    <div class="panel-heading text-center"><h1>Zamów lek recepturowy</h1></div>
+    <div class="panel-body">
+        <div class="content">
+            @using (Html.BeginForm("Payment", "RecipeDrug"))
+            {
+                <h2><small>Cena wytworzenia leku : </small><span class="text-success">@(String.Format("{0:0.00}", (Model.GetFullPrice())))zł</span></h2>
                 <h4>Cena poszczególnych składników:</h4>
                 <ul>
                     @foreach (var item in Model.RecipeDrug.Ingridients)
-                    {
-                        <li><span class="text-small">Składnik @(i): @(item.Price)zł</span></li>
+                {
+                        <li><span class="text-small">Składnik @i: @(String.Format("{0:0.00}", item.Price))zł</span></li>
                         i++;
                     }
                 </ul>
                 <h4 class="text-small">
-                    Przesyłka: @(Model.ShippingPrice)zł
-                </h4><br />
+                    Przesyłka: @(String.Format("{0:0.00}", Model.ShippingPrice))zł
+                </h4>   
                 <h4 class="text-small">
-                    Cena usługi: @(Model.ServicePrice)zł
+                    Cena usługi: @(String.Format("{0:0.00}", Model.ServicePrice))zł
                 </h4>
                 <h2>Wybierz metodę płatności</h2>
                 <br />
@@ -34,20 +35,20 @@
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 1<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 2<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 3<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 4<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 5<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 6<br /><img src="bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 1" /> Bank 1<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 2" /> Bank 2<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 3" /> Bank 3<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 4" /> Bank 4<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 5" /> Bank 5<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 6" /> Bank 6<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 7<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 8<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 9<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 10<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 11<br /><img src="bank.png" height="128" class="bank" /></div>
-                                    <div class="col-md-2"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Bank 12<br /><img src="bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 7" /> Bank 7<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 8" /> Bank 8<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 9" /> Bank 9<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 10" /> Bank 10<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 11" /> Bank 11<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
+                                    <div class="col-md-2"><input type="radio" name="PaymentType" value="Bank 12" /> Bank 12<br /><img src="~/Content/Images/bank.png" height="128" class="bank" /></div>
                                 </div>
                             </div>
                         </div>
@@ -61,8 +62,8 @@
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-4"><input type="radio" name="recipeDrugViewModel.PaymentType" /> MasterCard<br /><img src="master.png" height="128" class="card" /></div>
-                                    <div class="col-md-4"><input type="radio" name="recipeDrugViewModel.PaymentType" /> Visa<br /><img src="visa.png" height="128" class="card" /></div>
+                                    <div class="col-md-4"><input type="radio" name="PaymentType" value="MasterCard" /> MasterCard<br /><img src="~/Content/Images/master.png" height="128" class="card" /></div>
+                                    <div class="col-md-4"><input type="radio" name="PaymentType" value="Visa" /> Visa<br /><img src="~/Content/Images/visa.png" height="128" class="card" /></div>
                                 </div>
                             </div>
                         </div>
@@ -77,19 +78,20 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <label for="cash"><input type="radio" name="p3" checked />Płatność przy odbiorze paczki</label>
+                                        <label for="cash"><input type="radio" name="PaymentType" value="OnDelivery" checked />Płatność przy odbiorze paczki</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @Html.HiddenFor(m => m.RecipeDrug.ID)
                 <div class="form-group">
-                    <div class="col-sm-8 rtl">
-                        <button type="submit" class="btn btn-default" formaction="placeholder.html"><h2>Zapłać</h2></button>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Zapłać" class="btn btn-default" />
                     </div>
                 </div>
-                }
-            </div>
+            }
         </div>
     </div>
+</div>

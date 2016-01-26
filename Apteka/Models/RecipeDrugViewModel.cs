@@ -1,5 +1,7 @@
-﻿using Apteka.Enums;
+﻿using Common.Enums;
 using Common.Models;
+using PackageLogic.Models;
+using RecipeDrugLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,5 +35,26 @@ namespace Apteka.Models
                 new IngridientViewModel()
             };
         }
+
+        public RecipeDrugModel ToBusinessModel()
+        {
+            var m = new RecipeDrugModel()
+            {
+                CreatedDate = DateTime.Now,
+                EvaluatedDate = null,
+                ID = 0,
+                MadeBy = null,
+                MadeByID = null,
+                Package = new PackageModel(),
+                Ingridients = Ingridients.Select(x => x.ToBusinessModel()).ToList(),
+                PackageID = 0,
+                Status = Common.Enums.OrderStatusEnum.NotPaid
+            };
+            m.Package.Shipping = Shipping;
+            m.Package.Address = Address;
+
+            return m;
+        }
+
     }
 }

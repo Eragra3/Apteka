@@ -17,23 +17,26 @@ namespace RecipeDrugLogic.Services
         private readonly IUnitOfWorkFactory _factory = new UnitOfWorkFactory();
         private readonly ILogger _logger = new Logger();
 
-        public bool Add(RecipeDrugModel model)
+        public int? Add(RecipeDrugModel model)
         {
             using (var uow = _factory.Create())
             {
                 try
                 {
-                    uow.RecipeDrugRepository.Insert(model.ToEntity());
+                    var entity = model.ToEntity();
+
+                    uow.RecipeDrugRepository.Insert(entity);
 
                     uow.Save();
+
+                    return entity.ID;
                 }
                 catch (Exception e)
                 {
                     _logger.LogToFile(e);
-                    return false;
+                    return null;
                 }
             }
-            return true;
         }
 
         public bool Edit(RecipeDrugModel model)

@@ -128,18 +128,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\CustomAuthorize.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecipeDrugController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Enums\ShippingEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HashProvider.cs" />
+    <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Helpers\Translators.cs" />
     <Compile Include="Models\IngridientViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\PrimaryRecipeDrugViewModel.cs" />
+    <Compile Include="Models\RecipeDrugAfterPaymentViewModel.cs" />
     <Compile Include="Models\RecipeDrugPaymentViewModel.cs" />
     <Compile Include="Models\RecipeDrugViewModel.cs" />
     <Compile Include="Models\RegisterUserViewModel.cs" />
@@ -148,6 +150,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\bank.png" />
+    <Content Include="Content\Images\master.png" />
+    <Content Include="Content\Images\visa.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -190,9 +195,13 @@
     <Content Include="Views\Shared\_LeftMenu.cshtml" />
     <Content Include="Views\RecipeDrug\Index.cshtml" />
     <Content Include="Views\RecipeDrug\Payment.cshtml" />
+    <Content Include="Views\RecipeDrug\PaymentPlaceholder.cshtml" />
+    <Content Include="Views\RecipeDrug\Success.cshtml" />
+    <Content Include="Views\RecipeDrug\Failure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

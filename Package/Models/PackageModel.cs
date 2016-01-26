@@ -19,6 +19,8 @@ namespace PackageLogic.Models
 
         public DateTime? AssemblyDate { get; set; }
 
+        public ShippingEnum Shipping { get; set; }
+
         public PackageModel()
         {
 
@@ -32,6 +34,7 @@ namespace PackageLogic.Models
                 Price = model.Price;
                 Address = new AddressModel(model.Address);
                 AssemblyDate = model.AssemblyDate;
+                Shipping = (ShippingEnum)model.ShippingID;
             }
         }
 
@@ -43,6 +46,7 @@ namespace PackageLogic.Models
                 Price = Price,
                 Address = Address?.ToEntity(),
                 AssemblyDate = AssemblyDate,
+                ShippingID = (int)Shipping
             };
             return entity;
         }

@@ -45,6 +45,7 @@
     <Compile Include="Enums\OrderStatusEnum.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enums\ShippingEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DAL.csproj">

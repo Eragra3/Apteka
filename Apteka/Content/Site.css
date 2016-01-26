@@ -13,7 +13,7 @@ body {
 }
 
 .content-wrapper {
-    padding: 15px;
+    padding: 2em 2em 0 3em;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -31,7 +31,9 @@ select
 }
 
 footer {
-    position: absolute;
-    right: 10em;
+    position: relative;
+    right: 5em;
     bottom: 0;
+    z-index: -1;
+    direction: rtl;
 }

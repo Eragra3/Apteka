@@ -22,7 +22,6 @@ namespace RecipeDrugLogic.Models
 
         public IngridientModel()
         {
-
         }
 
         public IngridientModel(Ingridient entity)
