@@ -78,7 +78,7 @@ namespace DAL.Repository
             //context.Entry(entityToUpdate).State = EntityState.Modified;
 
             var entry = context.Entry<TEntity>(entityToUpdate);
-            var pkey = dbSet.Create().GetType().GetProperty("Id").GetValue(entityToUpdate);
+            var pkey = dbSet.Create().GetType().GetProperty("ID").GetValue(entityToUpdate);
 
             if (entry.State == EntityState.Detached)
             {

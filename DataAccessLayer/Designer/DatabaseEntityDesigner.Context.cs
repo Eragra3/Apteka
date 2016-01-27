@@ -40,5 +40,6 @@ namespace DAL.Designer
         public virtual DbSet<Positions> Positions { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<RecipeDrugs> RecipeDrugs { get; set; }
+        public virtual DbSet<Shippings> Shippings { get; set; }
     }
 }

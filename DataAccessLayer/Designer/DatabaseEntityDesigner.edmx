@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AptekaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AptekaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -115,6 +115,7 @@
           <Property Name="Address_HouseNumber" Type="nvarchar(max)" />
           <Property Name="Address_ApartmentNumber" Type="nvarchar(max)" />
           <Property Name="AssemblyDate" Type="datetime" />
+          <Property Name="ShippingID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PackageStatus">
           <Key>
@@ -150,6 +151,13 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="PackageID" Type="int" Nullable="false" />
           <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shippings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_dbo_Contains_dbo_Orders_OrderID">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
@@ -295,6 +303,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Packages_dbo_Shippings_ShippingID">
+          <End Role="Shippings" Type="Self.Shippings" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="ShippingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="RecipeDrugs" Type="Self.RecipeDrugs" Multiplicity="*" />
@@ -347,6 +367,7 @@
           <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipeDrugs" EntityType="Self.RecipeDrugs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shippings" EntityType="Self.Shippings" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Contains_dbo_Orders_OrderID" Association="Self.FK_dbo_Contains_dbo_Orders_OrderID">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Contains" EntitySet="Contains" />
@@ -395,6 +416,10 @@
             <End Role="Packages" EntitySet="Packages" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Packages_dbo_Shippings_ShippingID" Association="Self.FK_dbo_Packages_dbo_Shippings_ShippingID">
+            <End Role="Shippings" EntitySet="Shippings" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_RecipeDrugs_dbo_Employees_MadeByID" Association="Self.FK_dbo_RecipeDrugs_dbo_Employees_MadeByID">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
@@ -408,8 +433,7 @@
             <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AptekaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -546,6 +570,8 @@
           <Property Name="AssemblyDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Packages_PackageID" FromRole="Packages" ToRole="Orders" />
           <NavigationProperty Name="RecipeDrugs" Relationship="Self.FK_dbo_RecipeDrugs_dbo_Packages_PackageID" FromRole="Packages" ToRole="RecipeDrugs" />
+          <Property Name="ShippingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shippings" Relationship="AptekaModel.FK_dbo_Packages_dbo_Shippings_ShippingID" FromRole="Packages" ToRole="Shippings" />
         </EntityType>
         <EntityType Name="PackageStatus">
           <Key>
@@ -736,14 +762,6 @@
         <Association Name="FK_dbo_Orders_dbo_Packages_PackageID">
           <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Packages">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="PackageID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_RecipeDrugs_dbo_OrderStatus_StatusID">
           <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
@@ -845,7 +863,32 @@
             <End Role="Packages" EntitySet="Packages" />
             <End Role="RecipeDrugs" EntitySet="RecipeDrugs" />
           </AssociationSet>
+          <EntitySet Name="Shippings" EntityType="AptekaModel.Shippings" />
+          <AssociationSet Name="FK_dbo_Packages_dbo_Shippings_ShippingID" Association="AptekaModel.FK_dbo_Packages_dbo_Shippings_ShippingID">
+            <End Role="Shippings" EntitySet="Shippings" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Shippings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Packages" Relationship="AptekaModel.FK_dbo_Packages_dbo_Shippings_ShippingID" FromRole="Shippings" ToRole="Packages" />
+        </EntityType>
+        <Association Name="FK_dbo_Packages_dbo_Shippings_ShippingID">
+          <End Type="AptekaModel.Shippings" Role="Shippings" Multiplicity="1" />
+          <End Type="AptekaModel.Packages" Role="Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="ShippingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -961,6 +1004,7 @@
           <EntitySetMapping Name="Packages">
             <EntityTypeMapping TypeName="AptekaModel.Packages">
               <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Address_City" ColumnName="Address_City" />
@@ -1008,6 +1052,14 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="PackageID" ColumnName="PackageID" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="AptekaModel.Shippings">
+              <MappingFragment StoreEntitySet="Shippings">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,59 +1,59 @@
 ﻿@using Common.Enums
-@model Apteka.Models.PrimaryRecipeDrugViewModel
-@{
-    int i = 1;
-}
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @model Apteka.Models.PrimaryRecipeDrugViewModel
+    @{
+        int i = 1;
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="content-wrapper">
-            <h2>Zamów lek recepturowy</h2>
-        </div>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <div class="content-wrapper">
+                <h2>Zamów lek recepturowy</h2>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @foreach (var ing in Model.Ingridients)
-        {
-            <div class="form-group">
-                @Html.Label(string.Format("ingridient{0}L", i), string.Format("Składnik {0}", i), htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.RecipeDrugViewModel.Ingridients[i - 1].ProductID, new SelectList(Model.Ingridients, "ID", "Name", Model.RecipeDrugViewModel.Ingridients[i - 1].ProductID), string.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].ProductID, "", new { @class = "text-danger" })
-                </div>
-                @Html.Label("indgridient1Q", "Ilość", htmlAttributes: new { @class = "control-label col-md-1" })
-                <div class="col-md-4">
-                    <div class="input-group">
-                        @Html.TextBoxFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, new { @class = "form-control", rows = 5 })
-                        <span class="input-group-addon" id="basic-addon">mg</span>
+            @foreach (var ing in Model.Ingridients)
+            {
+                <div class="form-group">
+                    @Html.Label(string.Format("ingridient{0}L", i), string.Format("Składnik {0}", i), htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(m => m.RecipeDrugViewModel.Ingridients[i - 1].ProductID, new SelectList(Model.Ingridients, "ID", "Name", Model.RecipeDrugViewModel.Ingridients[i - 1].ProductID), string.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].ProductID, "", new { @class = "text-danger" })
                     </div>
-                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, "", new { @class = "text-danger" })
+                    @Html.Label("indgridient1Q", "Ilość", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, new { @class = "form-control", rows = 5 })
+                            <span class="input-group-addon" id="basic-addon">mg</span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Ingridients[i - 1].Quantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                i++;
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RecipeDrugViewModel.Recipe, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.RecipeDrugViewModel.Recipe, new { @class = "form-control", rows = 5 })
+                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Recipe, "", new { @class = "text-danger" })
                 </div>
             </div>
-            i++;
-        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RecipeDrugViewModel.Recipe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-8">
-                @Html.TextAreaFor(model => model.RecipeDrugViewModel.Recipe, new { @class = "form-control", rows = 5 })
-                @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Recipe, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.RecipeDrugViewModel.Shipping, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.RecipeDrugViewModel.Shipping, EnumHelper.GetSelectList(typeof(ShippingEnum), ShippingEnum.Courier).Select(x => { x.Text = Apteka.Helpers.Translators.ShippingTranslator(x.Text); return x; }), string.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Shipping, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Dalej" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RecipeDrugViewModel.Shipping, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.RecipeDrugViewModel.Shipping, EnumHelper.GetSelectList(typeof(ShippingEnum), ShippingEnum.Courier).Select(x => { x.Text = Apteka.Helpers.Translators.ShippingTranslator(x.Text); return x; }), string.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RecipeDrugViewModel.Shipping, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dalej" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+    }

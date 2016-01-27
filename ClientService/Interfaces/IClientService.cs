@@ -14,7 +14,7 @@ namespace ClientLogic.Interfaces
 
         UserModel Get(string login);
 
-        bool Add(UserModel model);
+        int? Add(UserModel model);
 
         bool Remove(UserModel model);
 

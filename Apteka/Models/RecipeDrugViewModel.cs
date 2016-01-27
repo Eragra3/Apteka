@@ -56,5 +56,17 @@ namespace Apteka.Models
             return m;
         }
 
+        public void PrepareIngridients()
+        {
+            Ingridients = new List<IngridientViewModel>()
+            {
+                new IngridientViewModel(),
+                new IngridientViewModel(),
+                new IngridientViewModel(),
+                new IngridientViewModel(),
+                new IngridientViewModel(),
+                new IngridientViewModel()
+            };
+        }
     }
 }

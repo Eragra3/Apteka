@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using ClientLogic.Models;
+using Common.Enums;
 using DAL.Models;
 using EmployeeLogic.Models;
 using PackageLogic.Models;
@@ -18,6 +19,10 @@ namespace RecipeDrugLogic.Models
         public int PackageID { get; set; }
 
         public PackageModel Package { get; set; }
+
+        public int UserID { get; set; }
+
+        public UserModel User { get; set; }
 
         public int? MadeByID { get; set; }
 
@@ -41,8 +46,10 @@ namespace RecipeDrugLogic.Models
             ID = entity.ID;
             PackageID = entity.PackageID;
             Package = new PackageModel(entity.Package);
+            UserID = entity.ClientID;
+            User = new UserModel(entity.Client);
             MadeByID = entity.MadeByID;
-            MadeBy = new EmployeeModel(entity.MadeBy);
+            MadeBy = entity.MadeBy == null ? null : new EmployeeModel(entity.MadeBy);
             EvaluatedDate = entity.EvaluatedDate;
             CreatedDate = entity.CreatedDate;
             Status = (OrderStatusEnum)entity.StatusID;
@@ -57,12 +64,14 @@ namespace RecipeDrugLogic.Models
                 ID = ID,
                 PackageID = PackageID,
                 Package = Package?.ToEntity(),
+                ClientID = UserID,
+                Client = User?.ToEntity(),
                 MadeByID = MadeByID,
                 MadeBy = MadeBy?.ToEntity(),
                 EvaluatedDate = EvaluatedDate,
                 CreatedDate = CreatedDate,
                 StatusID = (int)Status,
-                Ingridients = Ingridients.Select(x => x.ToEntity()).ToList(),
+                Ingridients = Ingridients.Select(x => { var m = x.ToEntity(); m.RecipeDrugID = ID; return m; }).ToList(),
             };
             return entity;
         }

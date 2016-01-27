@@ -18,7 +18,7 @@ namespace ClientLogic.Services
         private readonly IUnitOfWorkFactory _factory = new UnitOfWorkFactory();
         private readonly ILogger _logger = new Logger();
 
-        public bool Add(UserModel model)
+        public int? Add(UserModel model)
         {
             using (var uow = _factory.Create())
             {
@@ -30,12 +30,12 @@ namespace ClientLogic.Services
 
                     uow.Save();
 
-                    return true;
+                    return entity.ID;
                 }
                 catch (Exception e)
                 {
                     _logger.LogToFile(e);
-                    return false;
+                    return null;
                 }
             }
         }

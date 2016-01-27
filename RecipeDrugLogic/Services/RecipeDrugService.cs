@@ -45,7 +45,9 @@ namespace RecipeDrugLogic.Services
             {
                 try
                 {
-                    uow.RecipeDrugRepository.Update(model.ToEntity());
+                    var entity = model.ToEntity();
+
+                    uow.RecipeDrugRepository.Update(entity);
 
                     uow.Save();
                 }

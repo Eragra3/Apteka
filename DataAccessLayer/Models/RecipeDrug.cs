@@ -14,6 +14,10 @@ namespace DAL.Models
 
         //public virtual Employee EvaluatedBy { get; set; }
 
+        public int ClientID { get; set; }
+
+        public virtual Client Client { get; set; }
+
         public int PackageID { get; set; }
 
         public virtual Package Package { get; set; }

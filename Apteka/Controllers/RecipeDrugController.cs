@@ -41,12 +41,22 @@ namespace Apteka.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = Session["User"] as UserModel;
 
                 var recipeDrug = model.RecipeDrugViewModel;
 
                 recipeDrug.Address = user.Address;
                 recipeDrug.Ingridients = recipeDrug.Ingridients.Where(i => i.ProductID.HasValue).ToList();
+                if (recipeDrug.Ingridients.Count() < 1)
+                {
+                    var ingModels = _productService.GetAllIngridients();
+                    model.Ingridients = ingModels;
+                    model.RecipeDrugViewModel.PrepareIngridients();
+                    ModelState.AddModelError(string.Empty ,"Musisz wybrać jakieś składniki!");
+
+                    return View(model);
+                }
 
                 var ingridients = _productService.GetAllIngridients();
 
@@ -61,6 +71,7 @@ namespace Apteka.Controllers
 
                 businessModel.Package.Price = ingPrice + makingRecipeDrugPrice + Common.Enums.ShippingPrices.ShippingPrice(recipeDrug.Shipping);
                 businessModel.EvaluatedDate = DateTime.Now;
+                businessModel.UserID = user.ID;
 
                 var insertedID = _recipeDrugService.Add(businessModel);
 

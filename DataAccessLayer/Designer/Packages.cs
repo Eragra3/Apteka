@@ -29,10 +29,12 @@ namespace DAL.Designer
         public string Address_HouseNumber { get; set; }
         public string Address_ApartmentNumber { get; set; }
         public Nullable<System.DateTime> AssemblyDate { get; set; }
+        public int ShippingID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeDrugs> RecipeDrugs { get; set; }
+        public virtual Shippings Shippings { get; set; }
     }
 }

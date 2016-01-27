@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ClientService\ClientLogic.csproj">
+      <Project>{8142295c-8992-424d-a4d5-c40d6c05550e}</Project>
+      <Name>ClientLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{5e508bf1-e564-45cf-8092-46fe65162080}</Project>
       <Name>Common</Name>

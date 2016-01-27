@@ -115,6 +115,9 @@
     <Compile Include="Designer\RecipeDrugs.cs">
       <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
     </Compile>
+    <Compile Include="Designer\Shippings.cs">
+      <DependentUpon>DatabaseEntityDesigner.tt</DependentUpon>
+    </Compile>
     <Compile Include="Factories\UnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
@@ -142,6 +145,10 @@
     <Compile Include="Migrations\201601261845382_AddedShippingToPackage.cs" />
     <Compile Include="Migrations\201601261845382_AddedShippingToPackage.Designer.cs">
       <DependentUpon>201601261845382_AddedShippingToPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601271137559_AddedClientToRecipeModel.cs" />
+    <Compile Include="Migrations\201601271137559_AddedClientToRecipeModel.Designer.cs">
+      <DependentUpon>201601271137559_AddedClientToRecipeModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Shipping.cs" />
@@ -194,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601261845382_AddedShippingToPackage.resx">
       <DependentUpon>201601261845382_AddedShippingToPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601271137559_AddedClientToRecipeModel.resx">
+      <DependentUpon>201601271137559_AddedClientToRecipeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

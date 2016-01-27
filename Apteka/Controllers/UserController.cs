@@ -48,13 +48,15 @@ namespace Apteka.Controllers
                     PasswordHash = Helpers.HashProvider.GetHash(model.Password)
                 };
 
-                var success = _userService.Add(user);
+                var id = _userService.Add(user);
 
-                if (!success)
+                if (!id.HasValue)
                 {
                     ModelState.AddModelError(string.Empty, "Wystapił nieznany problem, spróbuj ponownie później");
                     return View(model);
                 }
+
+                user = _userService.Get(id.Value);
 
                 FormsAuthentication.SetAuthCookie(user.Email, false);
                 Session["User"] = user;
@@ -86,6 +88,7 @@ namespace Apteka.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
                     Session["User"] = user;
+                    if (returnUrl == null) return RedirectToAction("Index", "Home");
                     return Redirect(returnUrl);
                 }
                 ModelState.AddModelError(string.Empty, "Nie ma takiego użytkownika, lub hasło się nie zgadza");

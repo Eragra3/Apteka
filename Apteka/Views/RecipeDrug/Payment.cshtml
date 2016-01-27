@@ -13,7 +13,7 @@
                 <ul>
                     @foreach (var item in Model.RecipeDrug.Ingridients)
                 {
-                        <li><span class="text-small">Składnik @i: @(String.Format("{0:0.00}", item.Price))zł</span></li>
+                        <li><span class="text-small">@item.Product.Name: @(String.Format("{0:0.00}", item.Price))zł, @(item.Quantity)mg</span></li>
                         i++;
                     }
                 </ul>
