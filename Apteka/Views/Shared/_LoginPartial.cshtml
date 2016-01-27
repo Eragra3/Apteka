@@ -6,6 +6,7 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+            <li><a>Koszyk zamówień</a></li>
             <li>
                 <a class="text-primary">Zalogowany jako <b>@((Session["User"] as dynamic)?.Email)</b>.</a>
             </li>
